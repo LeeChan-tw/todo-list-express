@@ -7,6 +7,7 @@ const routes = require('./routes')
 require('./config/mongoose')
 
 const usePassport = require('./config/passport')
+const { rawListeners } = require('./config/mongoose')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -27,6 +28,13 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 usePassport(app)
+
+app.use((req, res, next) => {
+    console.log(req.user)
+    res.locals.isAuthenticated = req.isAuthenticated()
+    res.locals.user = req.user
+    next()
+})
 
 app.use(routes)
 
