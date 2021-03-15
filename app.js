@@ -11,7 +11,7 @@ const routes = require('./routes')
 require('./config/mongoose')
 
 const usePassport = require('./config/passport')
-const { rawListeners } = require('./config/mongoose')
+
 
 const app = express()
 const PORT = process.env.PORT
